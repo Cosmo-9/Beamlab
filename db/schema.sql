@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS beam_analyses (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  beam_length DOUBLE PRECISION NOT NULL CHECK (beam_length BETWEEN 2 AND 12),
+  point_load DOUBLE PRECISION NOT NULL CHECK (point_load BETWEEN 0 AND 40),
+  point_position DOUBLE PRECISION NOT NULL CHECK (point_position >= 0),
+  udl DOUBLE PRECISION NOT NULL CHECK (udl BETWEEN 0 AND 10),
+  inputs JSONB NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS beam_analyses_created_at_idx ON beam_analyses (created_at DESC);
